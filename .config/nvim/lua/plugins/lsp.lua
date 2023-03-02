@@ -223,6 +223,23 @@ return {
 
       vim.diagnostic.config({
         virtual_text = true,
+        severity_sort = true,
+      })
+
+      vim.api.nvim_create_autocmd('CursorHold', {
+        pattern = '*',
+        callback = function()
+          local opts = {
+            border = 'rounded',
+            focusable = false,
+            source = 'always',
+            prefix = ' ',
+            scope = 'cursor',
+            close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+          }
+
+          vim.diagnostic.open_float(nil, opts)
+        end
       })
     end
   }

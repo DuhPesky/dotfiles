@@ -328,6 +328,10 @@ function ColorMyLSP()
   vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = theme.base_30.red })
   vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = theme.base_30.yellow })
   vim.api.nvim_set_hl(0, 'DiagnosticInformation', { fg = theme.base_30.green })
+  -- vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { bg = theme.base_30.red })
+  -- vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { bg = theme.base_30.yellow })
+  -- vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { bg = theme.base_30.purple })
+
   vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = theme.base_30.black, bg = theme.base_30.green })
 
   vim.api.nvim_set_hl(0, 'RenamerTitle', { fg = theme.base_30.black, bg = theme.base_30.red })
