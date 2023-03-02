@@ -209,7 +209,12 @@ return {
 
       lsp.set_preferences({
         suggest_lsp_servers = false,
-        sign_icons = {},
+        sign_icons = {
+          error = '',
+          warn = '',
+          info = '',
+          hint = '',
+        },
       })
 
       -- for all lsp not rust or lean
