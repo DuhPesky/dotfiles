@@ -4,7 +4,8 @@ return {
     lazy = false,
     config = function()
       local theme, _ = require('core.colors')
-      -- TODO: Make background transparent for lualine
+      -- TODO: Make background transparent for lualine and add more pair-matches
+      -- to the other themes. Sadly i only use tokyonight and jellybeans.
       local lualine_theme
 
       if theme.theme_name == 'tokyonight' then
@@ -30,7 +31,7 @@ return {
             {
               'filename',
               file_status = true, -- displays file status (readonly status, modified status)
-              path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+              path = 0,           -- 0 = just filename, 1 = relative path, 2 = absolute path
             },
           },
           lualine_x = {
@@ -52,7 +53,7 @@ return {
             {
               'filename',
               file_status = true, -- displays file status (readonly status, modified status)
-              path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+              path = 1,           -- 0 = just filename, 1 = relative path, 2 = absolute path
             },
           },
           lualine_x = { 'location' },

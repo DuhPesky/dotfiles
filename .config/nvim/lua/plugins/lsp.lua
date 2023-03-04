@@ -7,6 +7,7 @@ local function lsp_keymaps(bufnr, rust_tools)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts(bufnr, 'LSP: Go to definition'))
 
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts(bufnr, 'LSP: Go to implementation'))
+  -- I don't use these really
   -- vim.keymap.set('n', '<C-sh>', vim.lsp.buf.signature_help, opts(bufnr, 'LSP: Signature help'))
   -- vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts(bufnr, 'LSP: Add workspace folder'))
   -- vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts(bufnr, 'LSP: Remove workspace folder'))
@@ -62,6 +63,13 @@ return {
     }
   },
   {
+    'lervag/vimtex',
+    ft = 'tex',
+    config = function()
+      vim.g.vimtex_view_method = 'zathura'
+    end
+  },
+  {
     'julian/lean.nvim',
     ft = 'lean',
     config = function()
@@ -86,7 +94,7 @@ return {
           lsp_keymaps(bufnr, true)
         end,
         settings = {
-          ['rust-analyzer'] = {
+              ['rust-analyzer'] = {
             checkOnSave = {
               allFeatures = true,
               command = 'clippy',
@@ -155,17 +163,17 @@ return {
 
       local cmp = require('cmp')
       local cmp_mappings = lsp.defaults.cmp_mappings({
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-d>'] = cmp.mapping.scroll_docs( -4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping.confirm {
+            ['<C-p>'] = cmp.mapping.select_prev_item(),
+            ['<C-n>'] = cmp.mapping.select_next_item(),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.close(),
+            ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = false,
         },
-        ['<Tab>'] = cmp.mapping(function(fallback)
+            ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
           elseif require('luasnip').expand_or_jumpable() then
@@ -183,10 +191,10 @@ return {
           'i',
           's',
         }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif require('luasnip').jumpable( -1) then
+          elseif require('luasnip').jumpable(-1) then
             vim.fn.feedkeys(
               vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true,
                 true, true), '')
@@ -231,19 +239,18 @@ return {
         severity_sort = true,
       })
 
+      -- Show diagnostic in floating window when over current underlined diagnostic
       vim.api.nvim_create_autocmd('CursorHold', {
         pattern = '*',
         callback = function()
-          local opts = {
+          vim.diagnostic.open_float(nil, {
             border = 'rounded',
             focusable = false,
             source = 'always',
             prefix = ' ',
             scope = 'cursor',
             close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
-          }
-
-          vim.diagnostic.open_float(nil, opts)
+          })
         end
       })
     end

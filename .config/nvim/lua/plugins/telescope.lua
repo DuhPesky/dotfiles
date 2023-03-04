@@ -11,22 +11,87 @@ return {
       'ThePrimeagen/harpoon',
     },
     keys = {
-      { '<leader>ff',  '<cmd> Telescope file_browser path=%:p:h <CR>',                           desc = 'Telescope: File browser' },
-      { '<leader>fwd', '<cmd> Telescope file_browser <CR>',                                      desc = 'Telescope: File browser at pwd' },
-      { '<leader>fd',  '<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>', desc = 'Telescope: File/folder fuzzy finder' },
-      { '<leader>fg',  '<cmd> Telescope live_grep <CR>',                                         desc = 'Telescope: Live grep' },
-      { '<leader>fb',  '<cmd> Telescope buffers <CR>',                                           desc = 'Telescope: Buffers' },
-      { '<leader>fh',  '<cmd> Telescope help_tags <CR>',                                         desc = 'Telescope: Help tags' },
-      { '<leader>fo',  '<cmd> Telescope oldfiles <CR>',                                          desc = 'Telescope: Old files' },
-      { '<leader>tk',  '<cmd> Telescope keymaps <CR>',                                           desc = 'Telescope: Keymaps' },
-      { '<leader>un',  '<cmd> Telescope undo <CR>',                                              desc = 'Telescope: Undo Tree' },
-      { '<leader>ha',  '<cmd> Telescope harpoon marks <CR>',                                     desc = 'Telescope: Harpoon menu' },
+      {
+        '<leader>ff',
+        '<cmd> Telescope file_browser path=%:p:h <CR>',
+        desc =
+        'Telescope: File browser'
+      },
+      {
+        '<leader>fwd',
+        '<cmd> Telescope file_browser <CR>',
+        desc =
+        'Telescope: File browser at pwd'
+      },
+      {
+        '<leader>fd',
+        '<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>',
+        desc =
+        'Telescope: File/folder fuzzy finder'
+      },
+      {
+        '<leader>fg',
+        '<cmd> Telescope live_grep <CR>',
+        desc =
+        'Telescope: Live grep'
+      },
+      {
+        '<leader>fb',
+        '<cmd> Telescope buffers <CR>',
+        desc =
+        'Telescope: Buffers'
+      },
+      {
+        '<leader>fh',
+        '<cmd> Telescope help_tags <CR>',
+        desc =
+        'Telescope: Help tags'
+      },
+      {
+        '<leader>fo',
+        '<cmd> Telescope oldfiles <CR>',
+        desc =
+        'Telescope: Old files'
+      },
+      {
+        '<leader>tk',
+        '<cmd> Telescope keymaps <CR>',
+        desc =
+        'Telescope: Keymaps'
+      },
+      {
+        '<leader>un',
+        '<cmd> Telescope undo <CR>',
+        desc =
+        'Telescope: Undo Tree'
+      },
+      {
+        '<leader>ha',
+        '<cmd> Telescope harpoon marks <CR>',
+        desc =
+        'Telescope: Harpoon menu'
+      },
       -- TODO: Figure out how to make this work for custom themes
       -- { '<leader>th',  '<cmd> Telescope colorscheme <CR>',                                       desc = 'Telescope: Themes' },
-      { '<leader>cm',  '<cmd> Telescope git_commits <CR>',                                       desc = 'Telescope: Git commits' },
-      { '<leader>gt',  '<cmd> Telescope git_status <CR>',                                        desc = 'Telescope: Git status' },
+      {
+        '<leader>cm',
+        '<cmd> Telescope git_commits <CR>',
+        desc =
+        'Telescope: Git commits'
+      },
+      {
+        '<leader>gt',
+        '<cmd> Telescope git_status <CR>',
+        desc =
+        'Telescope: Git status'
+      },
       -- harpoon
-      { '<leader>m',   function() require('harpoon.mark').add_file() end,                        desc = 'Harpoon: Mark a file' },
+      {
+        '<leader>m',
+        function() require('harpoon.mark').add_file() end,
+        desc =
+        'Harpoon: Mark a file'
+      },
     },
     config = function()
       require('telescope').setup {
@@ -87,15 +152,15 @@ return {
           file_browser = {
             hijack_netrw = true,
             mappings = {
-              ['i'] = {
-                ['<C-r>'] = require('telescope').extensions.file_browser.actions.rename,
-                ['<C-d>'] = require('telescope').extensions.file_browser.actions.remove,
-                ['<C-n>'] = require('telescope').extensions.file_browser.actions.create,
+                  ['i'] = {
+                    ['<C-r>'] = require('telescope').extensions.file_browser.actions.rename,
+                    ['<C-d>'] = require('telescope').extensions.file_browser.actions.remove,
+                    ['<C-n>'] = require('telescope').extensions.file_browser.actions.create,
               },
-              ['n'] = {
-                ['<C-r>'] = require('telescope').extensions.file_browser.actions.rename,
-                ['<C-d>'] = require('telescope').extensions.file_browser.actions.remove,
-                ['<C-n>'] = require('telescope').extensions.file_browser.actions.create,
+                  ['n'] = {
+                    ['<C-r>'] = require('telescope').extensions.file_browser.actions.rename,
+                    ['<C-d>'] = require('telescope').extensions.file_browser.actions.remove,
+                    ['<C-n>'] = require('telescope').extensions.file_browser.actions.create,
               }
             }
           },
@@ -103,15 +168,15 @@ return {
             entry_format = 'State #$ID | $STAT | $TIME',
             side_by_side = true,
             mappings = {
-              ['i'] = {
-                ['<cr>'] = require('telescope-undo.actions').yank_additions,
-                ['<S-cr'] = require('telescope-undo.actions').yank_deletions,
-                ['<C-cr>'] = require('telescope-undo.actions').restore,
+                  ['i'] = {
+                    ['<C-a><CR>'] = require('telescope-undo.actions').yank_additions,
+                    ['<C-d><CR>'] = require('telescope-undo.actions').yank_deletions,
+                    ['<C-re><CR>'] = require('telescope-undo.actions').restore,
               },
-              ['n'] = {
-                ['<cr>'] = require('telescope-undo.actions').yank_additions,
-                ['<S-cr'] = require('telescope-undo.actions').yank_deletions,
-                ['<C-cr>'] = require('telescope-undo.actions').restore,
+                  ['n'] = {
+                    ['<C-a><CR>'] = require('telescope-undo.actions').yank_additions,
+                    ['<C-d><CR>'] = require('telescope-undo.actions').yank_deletions,
+                    ['<C-re><CR>'] = require('telescope-undo.actions').restore,
               }
             }
           },

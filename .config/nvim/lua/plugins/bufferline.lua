@@ -16,7 +16,8 @@ return {
     opts = {
       options = {
         numbers = 'ordinal',
-        diagnostics = 'nvim_lsp', }
+        diagnostics = 'nvim_lsp',
+      }
     },
   }
 }
