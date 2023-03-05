@@ -313,7 +313,7 @@ function ColorMyTelescope()
       fg = transparent and theme.base_30.light_grey or theme.base_30.darker_black,
       bg = transparent and 'none' or theme.base_30.darker_black
     })
-  vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = theme.base_30.white, bg = theme.base_30.black2 })
+  vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = theme.base_30.white, bg = theme.base_30.darker_black })
   vim.api.nvim_set_hl(0, 'TelescopeResultsDiffAdd', { fg = theme.base_30.green })
   vim.api.nvim_set_hl(0, 'TelescopeResultsDiffChange', { fg = theme.base_30.yellow })
   vim.api.nvim_set_hl(0, 'TelescopeResultsDiffDelete', { fg = theme.base_30.red })
