@@ -2,7 +2,7 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     -- cant lazy load to hijack netrw
-    cmd = 'Telescope',
+    lazy = false,
     version = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -109,6 +109,7 @@ return {
             '--line-number',
             '--column',
             '--smart-case',
+            -- '--hidden',
           },
           prompt_prefix = '   ',
           selection_caret = '  ',

@@ -85,7 +85,7 @@ return {
       local rust_tools_settings = {
         on_attach = function(client, bufnr)
           -- Disable semantic highlighting
-          client.server_capabilities.semanticTokensProvider = nil
+          -- client.server_capabilities.semanticTokensProvider = nil
           lsp_keymaps(bufnr, true)
         end,
         settings = {
@@ -247,8 +247,8 @@ return {
 
       -- for all lsp not rust or lean
       lsp.on_attach(function(client, bufnr)
-        -- Disable semantic highlighting
-        client.server_capabilities.semanticTokensProvider = nil
+        -- Disable semantic highlighting, don't think i need this?
+        -- client.server_capabilities.semanticTokensProvider = nil
         lsp_keymaps(bufnr, false)
       end)
 
