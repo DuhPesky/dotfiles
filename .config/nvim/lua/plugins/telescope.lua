@@ -2,8 +2,8 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     -- cant lazy load to hijack netrw
-    lazy = false,
-    version = '0.1.0',
+    cmd = 'Telescope',
+    version = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
       'debugloop/telescope-undo.nvim',
@@ -165,8 +165,10 @@ return {
             }
           },
           undo = {
-            entry_format = 'State #$ID | $STAT | $TIME',
+            use_delta = true,
             side_by_side = true,
+            diff_context_lines = 8,
+            entry_format = 'State #$ID, $STAT, $TIME',
             mappings = {
                   ['i'] = {
                     ['<C-a><CR>'] = require('telescope-undo.actions').yank_additions,
@@ -181,6 +183,7 @@ return {
             }
           },
         },
+
         extensions_list = { 'file_browser', 'undo', 'harpoon' }
       }
 

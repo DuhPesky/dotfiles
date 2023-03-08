@@ -5,6 +5,11 @@ vim.opt.nu = true
 -- sync clipboptard between OS and nvim
 vim.opt.clipboard = 'unnamedplus'
 
+-- transparent cmp menu (doesn't completely work)
+-- vim.opt.pumblend = 20
+-- vim.opt.pumheight = 10
+-- vim.cmd "highlight! BorderBG guibg=NONE guifg=#00ff00"
+
 -- global status line
 vim.opt.laststatus = 3
 
@@ -38,8 +43,6 @@ vim.opt.signcolumn = 'yes'
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.opt.termguicolors = true
-
 vim.opt.swapfile = false
 vim.opt.backup = false
 
@@ -53,7 +56,7 @@ vim.opt.timeout = true
 vim.opt.timeoutlen = 400
 
 -- better completion experience
-vim.opt.completeopt = 'menuone,noselect'
+vim.opt.completeopt = 'menu,menuone,noinsert'
 
 -- highlight search
 vim.opt.hlsearch = false

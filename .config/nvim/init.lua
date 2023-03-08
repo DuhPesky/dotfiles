@@ -26,6 +26,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- Make sure to set 'mapleader' before lazy so your mappings are correct
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.opt.termguicolors = true
 
 -- Bootstraps lazy.nvim
 -- Github Link:

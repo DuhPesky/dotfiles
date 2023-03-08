@@ -9,4 +9,27 @@ return {
       }
     },
   },
+  {
+    'windwp/nvim-ts-autotag',
+    ft = {
+      'html',
+      'javascript',
+      'javascriptreact',
+      'typescriptreact',
+      'svelte',
+      'vue',
+      'xml',
+    },
+    opts = {
+      filetypes = {
+        'html',
+        'javascript',
+        'javascriptreact',
+        'typescriptreact',
+        'svelte',
+        'vue',
+        'xml',
+      }
+    }
+  },
 }

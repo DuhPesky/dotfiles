@@ -49,11 +49,6 @@ return {
     }
   },
   {
-    'folke/neodev.nvim',
-    lazy = false,
-    config = true,
-  },
-  {
     -- requires vimtex/treesitter
     'iurimateus/luasnip-latex-snippets.nvim',
     ft = 'tex',
@@ -119,7 +114,7 @@ return {
   },
   {
     'VonHeikemen/lsp-zero.nvim',
-    lazy = false,
+    event = { 'BufReadPre', 'BufNewFile' },
     branch = 'v1.x',
     dependencies = {
       -- LSP Support
@@ -138,16 +133,24 @@ return {
       -- Snippets
       'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
+
+      -- Neovim Specific
+      { 'folke/neodev.nvim', opts = { experimental = { pathStrict = true } } },
     },
     config = function()
       local lsp = require('lsp-zero')
 
       lsp.preset('recommended')
       lsp.ensure_installed({
+        'eslint',
+        'jsonls',
         'lua_ls',
         'rust_analyzer',
         'pyright',
+        'svelte',
+        'tailwindcss',
         'texlab',
+        'tsserver'
       })
 
       -- Fix undefined global 'vim'
@@ -163,8 +166,8 @@ return {
 
       local cmp = require('cmp')
       local cmp_mappings = lsp.defaults.cmp_mappings({
-            ['<C-p>'] = cmp.mapping.select_prev_item(),
-            ['<C-n>'] = cmp.mapping.select_next_item(),
+            ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+            ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
@@ -212,7 +215,24 @@ return {
       })
 
       lsp.setup_nvim_cmp({
-        mapping = cmp_mappings
+        mapping = cmp_mappings,
+        completion = {
+          completeopt = 'menu,menuone,noinsert,noselect'
+        },
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip', keyword_length = 2 },
+          { name = 'buffer',  keyword_length = 3 },
+          { name = 'path' },
+          { name = 'nvim_lua' },
+        },
+        -- tried variations of this to make doc on cmp transparent, but doesnt
+        -- work
+        -- window = {
+        --   documentation = cmp.config.window.bordered({
+        --     winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
+        --   }),
+        -- }
       })
 
       lsp.set_preferences({

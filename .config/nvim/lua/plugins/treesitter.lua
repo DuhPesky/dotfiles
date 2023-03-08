@@ -1,12 +1,13 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    lazy = false,
+    event = { 'BufReadPre', 'BufNewFile' },
     build = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
         -- A list of parser names, or 'all'
-        ensure_installed = { 'fish', 'help', 'lua', 'rust', 'toml' },
+        ensure_installed = { 'css', 'fish', 'help', 'html', 'lua', 'python', 'rust', 'svelte', 'toml', 'tsx',
+          'typescript' },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
