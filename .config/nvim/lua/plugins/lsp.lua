@@ -83,7 +83,7 @@ return {
     ft = 'rust',
     config = function()
       local rust_tools_settings = {
-        on_attach = function(client, bufnr)
+        on_attach = function(_, bufnr)
           -- Disable semantic highlighting
           -- client.server_capabilities.semanticTokensProvider = nil
           lsp_keymaps(bufnr, true)
@@ -221,8 +221,8 @@ return {
         },
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'luasnip', keyword_length = 2 },
-          { name = 'buffer',  keyword_length = 3 },
+          { name = 'luasnip' },
+          { name = 'buffer' },
           { name = 'path' },
           { name = 'nvim_lua' },
         },
@@ -246,7 +246,7 @@ return {
       })
 
       -- for all lsp not rust or lean
-      lsp.on_attach(function(client, bufnr)
+      lsp.on_attach(function(_, bufnr)
         -- Disable semantic highlighting, don't think i need this?
         -- client.server_capabilities.semanticTokensProvider = nil
         lsp_keymaps(bufnr, false)
