@@ -43,3 +43,4 @@ vim.keymap.set('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next se
 vim.keymap.set('n', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 vim.keymap.set('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 vim.keymap.set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
+

@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end
 })
---
+
 -- -- only format with prettier
 -- vim.api.nvim_create_autocmd('BufWritePre', {
 --   pattern = { '*.js', '*.jsx', '*.svelte', '*.tsx', '*.ts' },
@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 --     })
 --   end
 -- })
---
+
 -- Make sure to set 'mapleader' before lazy so your mappings are correct
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '

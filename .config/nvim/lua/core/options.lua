@@ -7,8 +7,7 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- transparent cmp menu (doesn't completely work)
 -- vim.opt.pumblend = 20
--- vim.opt.pumheight = 10
--- vim.cmd "highlight! BorderBG guibg=NONE guifg=#00ff00"
+vim.opt.pumheight = 10
 
 -- global status line
 vim.opt.laststatus = 3
@@ -19,7 +18,11 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.smartindent = true
+vim.opt.autoindent = true
 vim.opt.softtabstop = 2
+vim.opt.shiftround = true
+
+vim.opt.wrap = false
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -62,7 +65,7 @@ vim.opt.completeopt = 'menu,menuone,noinsert'
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
-vim.opt.colorcolumn = '99'
+vim.opt.colorcolumn = '100'
 vim.opt.cul = true
 vim.opt.scrolloff = 8
 vim.opt.textwidth = 80

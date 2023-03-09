@@ -83,9 +83,9 @@ return {
     ft = 'rust',
     config = function()
       local rust_tools_settings = {
-        on_attach = function(_, bufnr)
+        on_attach = function(client, bufnr)
           -- Disable semantic highlighting
-          -- client.server_capabilities.semanticTokensProvider = nil
+          client.server_capabilities.semanticTokensProvider = nil
           lsp_keymaps(bufnr, true)
         end,
         settings = {
