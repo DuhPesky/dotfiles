@@ -1,6 +1,6 @@
 return {
   'akinsho/bufferline.nvim',
-  lazy = false,
+  event = 'BufReadPost',
   version = 'v3.*',
   dependencies = 'kyazdani42/nvim-web-devicons',
   keys = {

@@ -1,6 +1,6 @@
 return {
   'ggandor/leap.nvim',
-  lazy = false,
+  event = 'BufReadPost',
   keys = {
     { 's', '<Plug>(leap-forward)',  desc = 'Leap: search forward' },
     { 's', '<Plug>(leap-forward)',  desc = 'Leap: search forward',  mode = 'x' },

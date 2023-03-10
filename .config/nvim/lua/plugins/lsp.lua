@@ -35,7 +35,7 @@ end
 return {
   {
     'j-hui/fidget.nvim',
-    lazy = false,
+    event = 'BufReadPost',
     opts = {
       text = {
         spinner = 'dots',
@@ -89,7 +89,7 @@ return {
           lsp_keymaps(bufnr, true)
         end,
         settings = {
-              ['rust-analyzer'] = {
+          ['rust-analyzer'] = {
             checkOnSave = {
               allFeatures = true,
               command = 'clippy',
@@ -121,6 +121,7 @@ return {
       'neovim/nvim-lspconfig',
       { 'williamboman/mason.nvim',           config = true },
       { 'williamboman/mason-lspconfig.nvim', config = true },
+      'jose-elias-alvarez/null-ls.nvim',
 
       -- Autocompletion
       'hrsh7th/nvim-cmp',
@@ -134,7 +135,7 @@ return {
       'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
 
-      -- Neovim Specific
+      -- Neovim
       { 'folke/neodev.nvim', opts = { experimental = { pathStrict = true } } },
     },
     config = function()
@@ -145,9 +146,8 @@ return {
         'eslint',
         'jsonls',
         'lua_ls',
-        'rust_analyzer',
         'pyright',
-        'svelte',
+        'rust_analyzer',
         'tailwindcss',
         'texlab',
         'tsserver'
@@ -166,17 +166,17 @@ return {
 
       local cmp = require('cmp')
       local cmp_mappings = lsp.defaults.cmp_mappings({
-            ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-            ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            ['<C-Space>'] = cmp.mapping.complete(),
-            ['<C-e>'] = cmp.mapping.close(),
-            ['<CR>'] = cmp.mapping.confirm {
+        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = false,
         },
-            ['<Tab>'] = cmp.mapping(function(fallback)
+        ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
           elseif require('luasnip').expand_or_jumpable() then
@@ -194,7 +194,7 @@ return {
           'i',
           's',
         }),
-            ['<S-Tab>'] = cmp.mapping(function(fallback)
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif require('luasnip').jumpable(-1) then
@@ -246,13 +246,12 @@ return {
       })
 
       -- for all lsp not rust or lean
-      lsp.on_attach(function(_, bufnr)
-        -- Disable semantic highlighting, don't think i need this?
+      lsp.on_attach(function(client, bufnr)
+        -- Disable semantic highlighting, looks worse on some filetypes, could
+        -- manually apply it to some filetypes
         -- client.server_capabilities.semanticTokensProvider = nil
         lsp_keymaps(bufnr, false)
       end)
-
-      lsp.setup()
 
       vim.diagnostic.config({
         virtual_text = true,
@@ -272,6 +271,18 @@ return {
             close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
           })
         end
+      })
+
+      lsp.setup()
+
+      local null_ls = require('null-ls')
+      null_ls.setup({
+        on_attach = lsp.build_options('null-ls', {}).on_attach,
+        sources = {
+          null_ls.builtins.formatting.prettier.with({
+            extra_filetypes = { "svelte" }
+          })
+        }
       })
     end
   }
