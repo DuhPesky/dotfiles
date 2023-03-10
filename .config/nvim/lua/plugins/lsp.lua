@@ -119,9 +119,8 @@ return {
     dependencies = {
       -- LSP Support
       'neovim/nvim-lspconfig',
-      { 'williamboman/mason.nvim',           config = true },
-      { 'williamboman/mason-lspconfig.nvim', config = true },
-      'jose-elias-alvarez/null-ls.nvim',
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
 
       -- Autocompletion
       'hrsh7th/nvim-cmp',
@@ -148,6 +147,7 @@ return {
         'lua_ls',
         'pyright',
         'rust_analyzer',
+        'svelte',
         'tailwindcss',
         'texlab',
         'tsserver'
@@ -246,12 +246,14 @@ return {
       })
 
       -- for all lsp not rust or lean
-      lsp.on_attach(function(client, bufnr)
+      lsp.on_attach(function(_, bufnr)
         -- Disable semantic highlighting, looks worse on some filetypes, could
         -- manually apply it to some filetypes
         -- client.server_capabilities.semanticTokensProvider = nil
         lsp_keymaps(bufnr, false)
       end)
+
+      lsp.setup()
 
       vim.diagnostic.config({
         virtual_text = true,
@@ -271,18 +273,6 @@ return {
             close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
           })
         end
-      })
-
-      lsp.setup()
-
-      local null_ls = require('null-ls')
-      null_ls.setup({
-        on_attach = lsp.build_options('null-ls', {}).on_attach,
-        sources = {
-          null_ls.builtins.formatting.prettier.with({
-            extra_filetypes = { "svelte" }
-          })
-        }
       })
     end
   }
