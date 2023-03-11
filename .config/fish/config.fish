@@ -1,7 +1,12 @@
 abbr -a c cargo
 abbr -a e nvim
 abbr -a g git
-abbr -a ec 'nvim -c "Telescope file_browser"'
+
+set SKIM_DEFAULT_COMMAND 'fd --type d'
+# || git ls-tree -r --name-only HEAD
+
+# go to dir with fuzzy finder
+alias fzf 'cd ~ & cd (sk -c "fd --type d")'
 
 # Set vi mode with jj to escape and jk to type j in insert mode
 set fish_key_bindings fish_user_key_bindings
@@ -112,5 +117,3 @@ function fish_prompt
 	echo -n '|'
 	set_color normal
 end
-
-
