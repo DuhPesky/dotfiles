@@ -1,7 +1,7 @@
 return {
   'nvim-lualine/lualine.nvim',
   lazy = false,
-  config = function()
+  opts = function()
     local theme, _ = require('core.colors')
     -- TODO: Make background transparent for lualine and add more pair-matches
     -- to the other themes. Sadly i only use tokyonight and jellybeans.
@@ -15,7 +15,7 @@ return {
       lualine_theme = 'powerline'
     end
 
-    require('lualine').setup({
+    return {
       options = {
         icons_enabled = true,
         theme = lualine_theme,
@@ -61,6 +61,6 @@ return {
       },
       tabline = {},
       extensions = { 'fugitive' },
-    })
+    }
   end
 }

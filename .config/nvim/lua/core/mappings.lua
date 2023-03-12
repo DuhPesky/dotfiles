@@ -1,5 +1,6 @@
 -- leader is set in init.lua
 ----- NORMAL MODE -----
+vim.keymap.set('n', ';', ':', { desc = 'Enter command mode' })
 vim.keymap.set('n', '<leader>bd', '<cmd> bd<CR>', { desc = 'Close current buffer' })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move to left pane' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to bottom pane' })
@@ -35,6 +36,7 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move visual block down' }
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move visual block up' })
 vim.keymap.set('v', '<', '<gv', { desc = 'Shift left' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Shift right' })
+vim.keymap.set('v', ';', ':', { desc = 'Enter command mode' })
 
 -- better search
 vim.keymap.set('n', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
@@ -43,4 +45,3 @@ vim.keymap.set('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next se
 vim.keymap.set('n', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 vim.keymap.set('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 vim.keymap.set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
-

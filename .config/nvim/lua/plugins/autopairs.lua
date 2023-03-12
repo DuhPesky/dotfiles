@@ -17,8 +17,6 @@ return {
       'javascriptreact',
       'typescriptreact',
       'svelte',
-      'vue',
-      'xml',
     },
     opts = {
       filetypes = {
@@ -27,8 +25,6 @@ return {
         'javascriptreact',
         'typescriptreact',
         'svelte',
-        'vue',
-        'xml',
       }
     }
   },

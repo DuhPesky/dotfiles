@@ -2,7 +2,7 @@ local function opts(bufnr, desc)
   return { buffer = bufnr, remap = false, desc = desc }
 end
 
-local function lsp_keymaps(bufnr, rust_tools)
+local function lsp_keymaps(bufnr)
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts(bufnr, 'LSP: Go to declaration'))
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts(bufnr, 'LSP: Go to definition'))
 
@@ -21,15 +21,6 @@ local function lsp_keymaps(bufnr, rust_tools)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts(bufnr, 'LSP: Previous diagnostic'))
   vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references, opts(bufnr, 'LSP: References'))
   vim.keymap.set('n', '<C-x>', vim.lsp.buf.format, opts(bufnr, 'LSP: Format'))
-
-  if rust_tools then
-    vim.keymap.set('n', '<space>vca', require('rust-tools').code_action_group.code_action_group,
-      opts(bufnr, 'LSP: Code action'))
-    vim.keymap.set('n', 'K', require('rust-tools').hover_actions.hover_actions, opts(bufnr, 'LSP: Hover'))
-  else
-    vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts(bufnr, 'LSP: Code action'))
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts(bufnr, 'LSP: Hover'))
-  end
 end
 
 return {
@@ -67,26 +58,32 @@ return {
   {
     'julian/lean.nvim',
     ft = 'lean',
-    config = function()
+    opts = function()
       local lean_on_attach = function(_, bufnr)
-        lsp_keymaps(bufnr, false)
+        lsp_keymaps(bufnr)
+        vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts(bufnr, 'LSP: Code action'))
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts(bufnr, 'LSP: Hover'))
       end
 
-      require('lean').setup({
+      return {
         abbreviations = { builtin = true },
         lsp = { on_attach = lean_on_attach },
-      })
+      }
     end,
   },
   {
     'simrat39/rust-tools.nvim',
     ft = 'rust',
-    config = function()
+    opts = function()
       local rust_tools_settings = {
         on_attach = function(client, bufnr)
           -- Disable semantic highlighting
           client.server_capabilities.semanticTokensProvider = nil
-          lsp_keymaps(bufnr, true)
+          lsp_keymaps(bufnr)
+
+          vim.keymap.set('n', '<space>vca', require('rust-tools').code_action_group.code_action_group,
+            opts(bufnr, 'LSP: Code action'))
+          vim.keymap.set('n', 'K', require('rust-tools').hover_actions.hover_actions, opts(bufnr, 'LSP: Hover'))
         end,
         settings = {
           ['rust-analyzer'] = {
@@ -100,7 +97,7 @@ return {
 
       local rust_lsp = require('lsp-zero').build_options('rust_analyzer', rust_tools_settings)
 
-      require('rust-tools').setup({
+      return {
         server = rust_lsp,
         tools = {
           inlay_hints = {
@@ -109,7 +106,7 @@ return {
             other_hints_prefix = '',
           },
         }
-      })
+      }
     end
   },
   {
@@ -137,10 +134,10 @@ return {
       -- Neovim
       { 'folke/neodev.nvim', opts = { experimental = { pathStrict = true } } },
     },
-    config = function()
+    opts = function()
       local lsp = require('lsp-zero')
-
       lsp.preset('recommended')
+
       lsp.ensure_installed({
         'eslint',
         'jsonls',
@@ -226,13 +223,6 @@ return {
           { name = 'path' },
           { name = 'nvim_lua' },
         },
-        -- tried variations of this to make doc on cmp transparent, but doesnt
-        -- work
-        -- window = {
-        --   documentation = cmp.config.window.bordered({
-        --     winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
-        --   }),
-        -- }
       })
 
       lsp.set_preferences({
@@ -247,13 +237,13 @@ return {
 
       -- for all lsp not rust or lean
       lsp.on_attach(function(_, bufnr)
-        -- Disable semantic highlighting, looks worse on some filetypes, could
-        -- manually apply it to some filetypes
+        -- Disable semantic highlighting, looks worse on some filetypes, could manually apply it to
+        -- some filetypes
         -- client.server_capabilities.semanticTokensProvider = nil
-        lsp_keymaps(bufnr, false)
+        vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts(bufnr, 'LSP: Code action'))
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts(bufnr, 'LSP: Hover'))
+        lsp_keymaps(bufnr)
       end)
-
-      lsp.setup()
 
       vim.diagnostic.config({
         virtual_text = true,

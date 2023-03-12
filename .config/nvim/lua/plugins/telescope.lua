@@ -152,15 +152,15 @@ return {
         file_browser = {
           hijack_netrw = true,
           mappings = {
-                ['i'] = {
-                  ['<C-r>'] = require('telescope').extensions.file_browser.actions.rename,
-                  ['<C-d>'] = require('telescope').extensions.file_browser.actions.remove,
-                  ['<C-n>'] = require('telescope').extensions.file_browser.actions.create,
+            ['i'] = {
+              ['<C-r>'] = require('telescope').extensions.file_browser.actions.rename,
+              ['<C-d>'] = require('telescope').extensions.file_browser.actions.remove,
+              ['<C-n>'] = require('telescope').extensions.file_browser.actions.create,
             },
-                ['n'] = {
-                  ['<C-r>'] = require('telescope').extensions.file_browser.actions.rename,
-                  ['<C-d>'] = require('telescope').extensions.file_browser.actions.remove,
-                  ['<C-n>'] = require('telescope').extensions.file_browser.actions.create,
+            ['n'] = {
+              ['<C-r>'] = require('telescope').extensions.file_browser.actions.rename,
+              ['<C-d>'] = require('telescope').extensions.file_browser.actions.remove,
+              ['<C-n>'] = require('telescope').extensions.file_browser.actions.create,
             }
           }
         },
@@ -170,15 +170,15 @@ return {
           diff_context_lines = 8,
           entry_format = 'State #$ID, $STAT, $TIME',
           mappings = {
-                ['i'] = {
-                  ['<C-a><CR>'] = require('telescope-undo.actions').yank_additions,
-                  ['<C-d><CR>'] = require('telescope-undo.actions').yank_deletions,
-                  ['<C-re><CR>'] = require('telescope-undo.actions').restore,
+            ['i'] = {
+              ['<C-a><CR>'] = require('telescope-undo.actions').yank_additions,
+              ['<C-d><CR>'] = require('telescope-undo.actions').yank_deletions,
+              ['<C-y><CR>'] = require('telescope-undo.actions').restore,
             },
-                ['n'] = {
-                  ['<C-a><CR>'] = require('telescope-undo.actions').yank_additions,
-                  ['<C-d><CR>'] = require('telescope-undo.actions').yank_deletions,
-                  ['<C-re><CR>'] = require('telescope-undo.actions').restore,
+            ['n'] = {
+              ['<C-a><CR>'] = require('telescope-undo.actions').yank_additions,
+              ['<C-d><CR>'] = require('telescope-undo.actions').yank_deletions,
+              ['<C-y><CR>'] = require('telescope-undo.actions').restore,
             }
           }
         },
